@@ -18,4 +18,5 @@ create a test case where update the student's fee using multiplier and write it 
  
  expect around 20-30% of test cases to fail
  
-
+###### Part 3 (Optional)
+In https://github.com/technoStudy/BasqarTestSuite in Group 1 testcase, read student firstname, lastname and gender from database by id, create a dataprovider that creates 3 student ids to fetch from database(should not be random ids)
