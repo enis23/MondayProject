@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <!--    here declare parameters, jdbc url, login and password-->
+    <parameter name="jdbc_username" value="daulet2030"></parameter>
+    <parameter name="jdbc_password" value="daulet2030@gmail.com"></parameter>
+    <parameter name="jdbc_url" value="jdbc:mysql://database-techno.c771qxmldhez.us-east-2.rds.amazonaws.com:3306/daulet2030_students_database"></parameter>
     <test verbose="2" preserve-order="true" name="D:/Project/BasqarTestSuite/src/test/resources">
         <classes>
             <class name="TestCase"></class>

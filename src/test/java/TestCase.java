@@ -3,10 +3,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,11 +14,9 @@ public class TestCase {
     private Statement statement;
     private Connection connection;
 
+    @Parameters({"jdbc_username", "jdbc_password", "jdbc_url"})
     @BeforeClass
-    public void connect() throws SQLException {
-        String url = "jdbc:mysql://database-techno.c771qxmldhez.us-east-2.rds.amazonaws.com:3306/daulet2030_students_database";
-        String user = "daulet2030";
-        String password = "daulet2030@gmail.com";
+    public void connect(String user, String password, String url) throws SQLException {
         connection = DriverManager.getConnection( url, user, password );
         statement = connection.createStatement();
     }
