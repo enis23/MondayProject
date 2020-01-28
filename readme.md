@@ -20,6 +20,7 @@ expect around 20-30% of test cases to fail
 
 ###### Requirements
 tests should run with testng.xml
+
 databse url, username and password must be provided as a parameter from testng.xml
 
  
