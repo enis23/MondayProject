@@ -57,11 +57,11 @@ public class TestCase {
         String genderFromExcel = "";
         for (int i = 1; i <= 100; i++) { // here skipping zero index because is just headers
             Row row = sheet.getRow(i);
-            if(row.getCell(0).getNumericCellValue() == idFromSQL){
-                genderFromExcel = row.getCell( 1 ).getStringCellValue();
+            if(row.getCell(0).getNumericCellValue() == idFromSQL){ // cell zero is the id column
+                genderFromExcel = row.getCell( 1 ).getStringCellValue(); // cell 1 is the gender column
             }
         }
-        // Alternatively
+        // Alternatively, because the ids in excel are in the same order as in SQL
     /** Row row = sheet.getRow( idFromSQL );
         Cell idCell = row.getCell( 0 );
         Cell genderCell = row.getCell( 1 );
