@@ -1,4 +1,3 @@
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -75,18 +74,49 @@ public class TestCase {
         Assert.assertEquals( genderFromSQL, genderFromExcel );
     }
 
-    public Object[][] studentsData()  {
+    @DataProvider(name = "student")
+    public Object[][] studentsData() throws SQLException {
         // select id and multiplier from students table and generate Object[][]
-        return null;
+        ResultSet resultSet = statement.executeQuery( "select " +
+                "* " +
+                "from student" );
+        resultSet.last();
+        int numberOfRow = resultSet.getRow();
+        Object[][] resultData = new Object[numberOfRow][2];
+        resultSet.beforeFirst();
+        int i = 0;
+        while(resultSet.next()) {
+            Integer id = resultSet.getInt( "id" );
+            Double multiplier = resultSet.getDouble( "multiplier" );
+            resultData[i][0] = id;
+            resultData[i][1] = multiplier;
+            i++;
+        }
+
+        return resultData;
     }
 
-    public void multiplierTest() {
+    @Test(dataProvider = "student")
+    public void multiplierTest(Integer id, Double multiplier) throws SQLException {
         // select student's fee from students table by id and save in variable for assertion
+        PreparedStatement resultStatement = connection.prepareStatement( "select fee from student " +
+                "where id = ?" );
+        resultStatement.setInt( 1, id );
+        ResultSet rs = resultStatement.executeQuery();
+        rs.first();
+        Double expected = rs.getDouble( 1 );
 
         // update student's fee by id, multiply fee by multiplier
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE student SET fee = (fee * ?) WHERE id = ?;");
+        preparedStatement.setDouble( 1, multiplier);
+        preparedStatement.setInt(2, id);
+        preparedStatement.executeUpdate();
 
         // select student's fee from students table by id and assert that it's updated according to multiplier within 0.004 delta
-
+        rs = resultStatement.executeQuery();
+        rs.first();
+        Double actual = rs.getDouble( 1 );
+        Assert.assertEquals(actual, expected * multiplier, 0.004);
     }
 
 
