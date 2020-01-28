@@ -6,7 +6,7 @@ create table student (
 	id INT,
 	name VARCHAR(50),
 	gender VARCHAR(50),
-	fee DECIMAL(6,2),
+	fee DECIMAL(16,2),
 	multiplier  DECIMAL(3,2)
 );
 insert into student (id, name, gender, fee, multiplier ) values (1, 'Minnie', 'Female', 536.53, 1.95);
